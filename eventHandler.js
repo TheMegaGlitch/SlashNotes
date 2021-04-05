@@ -10,7 +10,7 @@ module.exports = function(client, instance){
     client.on("ready", () => {
         console.log(`Client ${client.user.tag} (${client.user.id}) READY | Instance ${instance}`)
         function setStatus(){
-            client.user.setActivity(`Taking notes via Slash Commands | ${client.guilds.cache.size} ${client.guilds.cache.size == 1?"Server":"Servers"} | /help`)
+            client.user.setActivity(`users taking notes via Slash Commands | ${client.guilds.cache.size} ${client.guilds.cache.size == 1?"Server":"Servers"} | /help`, {type:"WATCHING"})
         }
         setStatus()
         setInterval(() => {
