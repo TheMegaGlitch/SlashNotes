@@ -8,11 +8,16 @@ const interactionTemplate = require("../modules/interactionHandler").interaction
  * @param {Discord.Client} client
  */
 module.exports.execute = (payload, client) => {
+    const noteTitle = payload.data.options[0]["value"]
+    const noteContent = payload.data.options[1]["value"]
+    const publicNote = payload.data.options[2]["value"]
+    const ephemeralNote = publicNote && payload.data.options[3] && payload.data.options[3].value ||false
     function ack(){
         return new Promise((resolve, reject) => {
             let responsePayload = {
                 "type": 5
             };
+            publicNote == false ? responsePayload.data = {flags:64} : undefined
             fetch(`https://discord.com/api/v8/interactions/${payload.id}/${payload.token}/callback`, {
                 method:"POST",
                 headers:{
@@ -32,6 +37,7 @@ module.exports.execute = (payload, client) => {
                     "parse": []
                 }
             };
+            publicNote == false ? responsePayload.flags = 64 : undefined
             fetch(`https://discord.com/api/v8/webhooks/${client.user.id}/${payload.token}`, {
                 method:"POST",
                 headers:{
@@ -43,9 +49,6 @@ module.exports.execute = (payload, client) => {
             .catch(reject)
         })
     }
-    const noteTitle = payload.data.options[0]["value"]
-    const noteContent = payload.data.options[1]["value"]
-    const publicNote = payload.data.options[2]["value"]
     ack().then(() => {
         if(publicNote == true && !payload.guild_id)
             return sendMessage(`🏠 This feature is only available in servers.`)
@@ -62,10 +65,13 @@ module.exports.execute = (payload, client) => {
         const notePayload = {
             title:noteTitle,
             content:noteContent,
-            author:payload.member?payload.member.user.id:payload.user.id
+            author:payload.member?payload.member.user.id:payload.user.id,
+            ephemeral:ephemeralNote
         }
         if(publicNote != true){
             databaseHandler.get("notes", `${payload.member?payload.member.user.id:payload.user.id}`).then((notes = []) => {
+                if(Object.keys(notes).length == 50)
+                    return sendMessage(`❌ You can only have up to 50 personal notes.`)
                 if(notes.filter(n => n.title == notePayload.title).length > 0)
                     return sendMessage(`❌ You already have a note with that name. To reuse this name, delete the old note that has this name, then try again.`)
                 notes.push(notePayload)
@@ -77,6 +83,8 @@ module.exports.execute = (payload, client) => {
             databaseHandler.get("notes", `${payload.guild_id}`).then((notes = {}) => {
                 if(notes[noteTitle])
                     return sendMessage(`❌ You already have a note with that name. To reuse this name, delete the old note that has this name, then try again.`)
+                if(Object.keys(notes).length == 100)
+                    return sendMessage(`❌ You have reached the maximum amount of server slash notes. (100)`)
                 fetch(`https://discord.com/api/v8/applications/${client.user.id}/guilds/${payload.guild_id}/commands`, {
                     method:"POST",
                     headers:{
@@ -85,7 +93,8 @@ module.exports.execute = (payload, client) => {
                     },
                     body:JSON.stringify({
                         name:noteTitle,
-                        description:noteContent.length > 100?noteContent.slice(0, 97)+"...":noteContent
+                        description:noteContent.length > 100?noteContent.slice(0, 97)+"...":noteContent,
+                        ephemeral:ephemeralNote
                     })
                 })
                 .then(r => r.json())
@@ -97,8 +106,12 @@ module.exports.execute = (payload, client) => {
                     (newInteraction) => {
                         notes[newInteraction.id] = notePayload
                         databaseHandler.set("notes", `${payload.guild_id}`, notes).then(() => {
-                            return sendMessage(`✅ Created server note! Check it via the Slash Command menu.`, undefined, 4, client)
+                            return sendMessage(`✅ Created ${ephemeralNote?"ephemeral ":""}server note! Check it via the Slash Command menu.`, undefined, 4, client)
                         })
+                })
+                .catch(e => {
+                    console.error(e)
+                    sendMessage(`⚠️ Something went wrong while attempting to create the note. Please contact bot support if the issue persists.`)
                 })
             })
         }
@@ -108,5 +121,5 @@ module.exports.execute = (payload, client) => {
 module.exports.info = {
     name:"create",
     about:"Create a note",
-    cooldown:30
+    cooldown:10
 }

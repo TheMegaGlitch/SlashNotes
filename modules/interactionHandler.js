@@ -85,12 +85,22 @@ let cooldowns = new Map()
 const config = require("../config.json")
 
 const commandIDs = {
+<<<<<<< HEAD
   sn_create:config.sn_create,
   sn_view:config.sn_view,
   sn_delete:config.sn_delete,
   sn_list:config.sn_list,
   sn_help:config.sn_help,
   sn_post:config.sn_post
+=======
+  create:config.create,
+  view:config.view,
+  delete:config.delete,
+  list:config.list,
+  help:config.help,
+  post:config.post,
+  settings:config.settings
+>>>>>>> 4622aca5330b9e0a5b3d4e271bc8c8a363320090
 }
 
 const guildNoteHandler = require("./guildNotesHandler")
