@@ -97,7 +97,7 @@ module.exports.execute = (payload, client) => {
 
 module.exports.info = {
     name:"settings",
-    about:"SlashNotes: Edit settings for SlashNotes in this server.",
+    about:"Edit settings for SlashNotes in this server.",
     cooldown:3
 }
 
