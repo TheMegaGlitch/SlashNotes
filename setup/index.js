@@ -89,7 +89,7 @@ const commands = [
       ]
     },
     {
-      name: 'settings',
+      name: 'sn_settings',
       description: 'SlashNotes: Edit settings for SlashNotes in this server.',
       options: [
         {
