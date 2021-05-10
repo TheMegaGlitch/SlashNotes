@@ -90,7 +90,8 @@ const commandIDs = {
   sn_delete:config.sn_delete,
   sn_list:config.sn_list,
   sn_help:config.sn_help,
-  sn_post:config.sn_post
+  sn_post:config.sn_post,
+  sn_settings:config.sn_settings
 }
 
 const guildNoteHandler = require("./guildNotesHandler")
