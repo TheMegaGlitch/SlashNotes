@@ -57,7 +57,7 @@ module.exports.execute = (payload, client) => {
         require("../app").interactionCommands.forEach(c => helpMenuMain.push(`**${c.info.name}**: ${c.info.about}`))
 
         //Notes
-        helpMenuMain.push(`\n**__Notes__**\n- The Manage Server permission is required to manage Server Slash notes. (Notes that can be seen by everyone in the server through the Slash Commands menu.)\n`, "- Due to Discord's limits on Slash Commands, you can only have up to 100 Server Slash notes.")
+        helpMenuMain.push(`\n**__Notes__**\n- The Manage Server permission is required to manage Server Slash notes. (Notes that can be seen by everyone in the server through the Slash Commands menu.)\n`, "- Due to Discord's limits on Slash Commands, you can only have up to 100 Server Slash notes.\n", "-This special version of SlashNotes was created to showcase a proposal made my **MegaGlitch#7060**, which is, adding a `sn_` prefix to the bot slash commands for easier interaction, no confusion beetween bots with similar commands, and better UX.")
 
         //Footer
         helpMenuFooter.push(`Version ${require("../package.json").version} | Created by: **TechGeekGamer#7205** | Forked by: **MegaGlitch#7060**`)
