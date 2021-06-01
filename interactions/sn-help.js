@@ -51,7 +51,7 @@ module.exports.execute = (payload, client) => {
         let helpMenuFooter = new Array()
 
         //Top Bar
-        helpMenuTop.push(`**SlashNotes**`, `[Support Server](<https://discord.gg/eP8ab7wsp4>)`, `[Invite](<https://discord.com/api/oauth2/authorize?client_id=799921906047647744&scope=bot%20applications.commands>)`, `[Privacy Policy](<https://gist.github.com/TechGeekGamer/3a0bf5de34cb04018f205f55852cd5ba>)`, `[GitHub](<https://github.com/TechGeekGamer/SlashNotes>)`)
+        helpMenuTop.push(`**SlashNotes Internal**`, `[Invite](<https://discord.com/api/oauth2/authorize?client_id=826853957212438610&scope=bot%20applications.commands>)`, `[Privacy Policy](<https://gist.github.com/TechGeekGamer/3a0bf5de34cb04018f205f55852cd5ba>)`, `[GitHub](<https://github.com/TheMegaGlitch/SlashNotes>)`)
 
         //Command List
         require("../app").interactionCommands.forEach(c => helpMenuMain.push(`**${c.info.name}**: ${c.info.about}`))
@@ -60,7 +60,7 @@ module.exports.execute = (payload, client) => {
         helpMenuMain.push(`\n**__Notes__**\n- The Manage Server permission is required to manage Server Slash notes. (Notes that can be seen by everyone in the server through the Slash Commands menu.)\n`, "- Due to Discord's limits on Slash Commands, you can only have up to 100 Server Slash notes.")
 
         //Footer
-        helpMenuFooter.push(`Version ${require("../package.json").version} | Created by: **TechGeekGamer#7205**`)
+        helpMenuFooter.push(`Version ${require("../package.json").version} | Created by: **TechGeekGamer#7205** | Forked by: **MegaGlitch#7060**`)
         
 
         if(payload.guild_id && (process.env.GUILDS_noModPermissionRequiredCreateNote || []).includes(payload.guild_id))
