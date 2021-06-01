@@ -85,13 +85,13 @@ let cooldowns = new Map()
 const config = require("../config.json")
 
 const commandIDs = {
-  sn-create:config.sn-create,
-  sn-view:config.sn-view,
-  sn-delete:config.sn-delete,
-  sn-list:config.sn-list,
-  sn-help:config.sn-help,
-  sn-post:config.sn-post,
-  sn-settings:config.sn-settings
+  sn_create:config.sn_create,
+  sn_view:config.sn_view,
+  sn_delete:config.sn_delete,
+  sn_list:config.sn_list,
+  sn_help:config.sn_help,
+  sn_post:config.sn_post,
+  sn_settings:config.sn_settings
 }
 
 const guildNoteHandler = require("./guildNotesHandler")
