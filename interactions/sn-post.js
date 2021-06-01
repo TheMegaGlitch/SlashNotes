@@ -2,7 +2,7 @@ fetch = require("node-fetch")
 const databaseHandler = require("../modules/databaseHandler")
 
 const interactionTemplate = require("../modules/interactionHandler").interactionTemplate
-const GuildSettings = require("./sn_settings").GuildSettings
+const GuildSettings = require("./sn-settings").GuildSettings
 /**
  * 
  * @param {interactionTemplate} payload 

@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const { GuildSettings } = require("./interactions/sn_settings")
+const { GuildSettings } = require("./interactions/sn-settings")
 const databaseHandler = require("./modules/databaseHandler")
 
 /**

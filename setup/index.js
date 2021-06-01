@@ -2,7 +2,7 @@ const {writeFileSync, existsSync} = require("fs")
 const Interaction = require("./modules/interactions")
 const commands = [
     {
-      name: 'sn_create',
+      name: 'sn-create',
       description: 'Create a note.',
       options: [
         {
@@ -32,7 +32,7 @@ const commands = [
       ]
     },
     {
-      name: 'sn_view',
+      name: 'sn-view',
       description: 'View a note you own. (Does not work for Server Slash notes)',
       options: [
         {
@@ -44,7 +44,7 @@ const commands = [
       ]
     },
     {
-      name: 'sn_delete',
+      name: 'sn-delete',
       description: 'Delete a note using its name.',
       options: [
         {
@@ -62,11 +62,11 @@ const commands = [
       ]
     },
     {
-      name: 'sn_list',
+      name: 'sn-list',
       description: 'View notes you own. (Does not work for Server Slash notes)',
     },
     {
-      name: 'sn_help',
+      name: 'sn-help',
       description: 'View all available commands or view information on a certain one.',
       options: [
         {
@@ -77,7 +77,7 @@ const commands = [
       ]
     },
     {
-      name: 'sn_post',
+      name: 'sn-post',
       description: 'Share a note you own in the current channel. (Does not work for Server Slash notes)',
       options: [
         {
@@ -89,7 +89,7 @@ const commands = [
       ]
     },
     {
-      name: 'sn_settings',
+      name: 'sn-settings',
       description: 'Edit settings for SlashNotes in this server.',
       options: [
         {
