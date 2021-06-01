@@ -11,7 +11,7 @@ module.exports = function(client, instance){
     client.on("ready", () => {
         console.log(`Client ${client.user.tag} (${client.user.id}) READY | Instance ${instance}`)
         function setStatus(){
-            client.user.setActivity(`users taking notes via Slash Commands | ${client.guilds.cache.size} ${client.guilds.cache.size == 1?"Server":"Servers"} | /help`, {type:"WATCHING"})
+            client.user.setActivity(`users taking notes via Slash Commands | ${client.guilds.cache.size} ${client.guilds.cache.size == 1?"Server":"Servers"} | /sn_help`, {type:"WATCHING"})
         }
         databaseHandler.set("guildSettings", "DM", new GuildSettings())
         setStatus()
